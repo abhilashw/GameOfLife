@@ -1,4 +1,5 @@
 import java.util.* ;
+
 public class GameOfLife{
 	int width;
 	int height;
@@ -51,7 +52,7 @@ public class GameOfLife{
 
 
 
-	public List<List<Character>> renderBoard(List<List<Integer>> random, int width,int height){
+	public void renderBoard(List<List<Integer>> random){
 
 		List<List<Character>> board =new ArrayList<List<Character>>();
 		int i=0;
@@ -72,11 +73,17 @@ public class GameOfLife{
 			board.add(ins);	
 			i++;
 		}
-		return board ;
+		for(int m=0;m<board.size() ;m++){
+			for(int j=0;j<board.get(m).size() ;j++){
+				System.out.printf("%c ",board.get(m).get(j));
+			}
+			System.out.println();
+		}
+		
 	}
 
 
-	public List<List<Integer>> noOfNeighbour(List<List<Character>> initialState, int width,int height){
+	public List<List<Integer>> noOfNeighbour(List<List<Character>> initialState){
 		List<List<Integer>> neighbour = deadState(width,height) ;
 
 		int i=0;
@@ -154,33 +161,43 @@ public class GameOfLife{
 
 	}
 
-	
+	public List<List<Character>> nextBoardState(List<List<Integer>> neighbour,List<List<Character>> initialState){
+
+		List<List<Character>> nextState =new ArrayList<List<Character>>();
+		int i=0;
+		while(i<height){
+			List<Integer> inside = neighbour.get(i);
+			List<Character> ins= new ArrayList<>();
+			int j=0;
+			while(j< width){
+				
+				if(inside.get(j)==0 || inside.get(j)==1 || inside.get(j)>3){
+					ins.add(' ');
+				}
+				else if(inside.get(j)==3){
+					ins.add('+');
+				}
+				else if(initialState.get(i).get(j)=='+' && (inside.get(j)==2 || inside.get(j)==3)){
+					ins.add('+');
+				}
+				j++;
+			}
+			nextState.add(ins);	
+			i++;
+		}
+		return nextState ;
+	}
+
 
 	public static void main(String[] args){
 
 
 		GameOfLife system1=new GameOfLife(3,3);
 		List<List<Integer>> res=system1.randomState(3,3);
-		List<List<Character>> b =system1.renderBoard(res,3,3);
-		List<List<Integer>> res1=system1.noOfNeighbour(b,3,3);
-
-		// System.out.println(res);
-		// System.out.println(res1);
-		// System.out.println(b);
+		system1.renderBoard(res);
+		// List<List<Integer>> res1=system1.noOfNeighbour(b);
+		// List<List<Character>> b1 =system1.nextBoardState(res1,b);
 		
 		
-		for(int i=0;i<b.size() ;i++){
-			for(int j=0;j<b.get(i).size() ;j++){
-				System.out.printf("%c ",b.get(i).get(j));
-			}
-			System.out.println();
-		}
-
-		for(int i=0;i<b.size() ;i++){
-			for(int j=0;j<res1.get(i).size() ;j++){
-				System.out.printf("%d ",res1.get(i).get(j));
-			}
-			System.out.println();
-		}
 	}
 }
