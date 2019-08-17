@@ -27,20 +27,20 @@ public class GameOfLife{
 	}
 
 
-	public List<List<Integer>> randomState(int width,int height){
+	public List<List<Character>> randomState(int width,int height){
 		Random rand =new Random() ;
 
-		List<List<Integer>> random =new ArrayList<List<Integer>>(height);
+		List<List<Character>> random =new ArrayList<List<Character>>(height);
 		int i=0;
 		while(i<height){
-			List<Integer> inside =new ArrayList<Integer>(width);
+			List<Character> inside =new ArrayList<>(width);
 			int j=0;
 			while(j< width){
 				double n=rand.nextDouble() ;
 				if(n<=0.5){
-					inside.add(0);
+					inside.add('.');
 				}else{
-					inside.add(1);
+					inside.add('O');
 				}	
 				j++;
 			}
@@ -52,34 +52,13 @@ public class GameOfLife{
 
 
 
-	public void renderBoard(List<List<Integer>> random){
-
-		List<List<Character>> board =new ArrayList<List<Character>>();
-		int i=0;
-		while(i<height){
-			List<Integer> inside = random.get(i);
-			List<Character> ins= new ArrayList<>();
-			int j=0;
-			while(j< width){
-				
-				if(inside.get(j)==1){
-					ins.add('+');
-				}
-				else{
-					ins.add(' ');
-				}
-				j++;
-			}
-			board.add(ins);	
-			i++;
-		}
-		for(int m=0;m<board.size() ;m++){
-			for(int j=0;j<board.get(m).size() ;j++){
-				System.out.printf("%c ",board.get(m).get(j));
+	public void renderBoard(List<List<Character>> random){
+		for(int i=0;i<random.size() ;i++){
+			for(int j=0;j<random.get(i).size() ;j++){
+				System.out.printf("%c ",random.get(i).get(j));
 			}
 			System.out.println();
-		}
-		
+		}	
 	}
 
 
@@ -95,68 +74,69 @@ public class GameOfLife{
 			while(j< width){
 				int count =1 ;
 				if(i==0 && j==0){
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j+1) =='+'){ins.set(j, count++ ) ;}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j+1) =='O'){ins.set(j, count++ ) ;}
 				}
 				else if(i==0 && j==width-1){
-					if(initialState.get(i).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j-1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ ) ;}
+					if(initialState.get(i).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j-1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ ) ;}
 				}
 				else if(i==height -1 && j==0){
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j+1) =='+'){ins.set(j, count++ ) ;}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j+1) =='O'){ins.set(j, count++ ) ;}
 				}
 				else if(i==height -1 && j==width -1){
-					if(initialState.get(i).get(j-1)=='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j-1)=='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i-1).get(j)=='+'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j-1)=='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j-1)=='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i-1).get(j)=='O'){ins.set(j, count++ );}
 				}
 				else if(i==0){
-					if(initialState.get(i).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j-1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j+1) =='+'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j-1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j+1) =='O'){ins.set(j, count++ );}
 				}
 				else if(i==height -1){
-					if(initialState.get(i).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j-1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i-1).get(j) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i-1).get(j+1) =='+'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j-1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i-1).get(j) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i-1).get(j+1) =='O'){ins.set(j, count++ );}
 				}
 				else if(j==0){
-					if(initialState.get(i-1).get(j) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j+1) =='+'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j+1) =='O'){ins.set(j, count++ );}
 				}
 				else if(j==width-1){
-					if(initialState.get(i-1).get(j) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i).get(j-1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i+1).get(j-1) =='+'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i).get(j-1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i+1).get(j-1) =='O'){ins.set(j, count++ );}
 				}
 				else if(i>0 && j>0 && i< height && j< width){
-					if(initialState.get(i-1).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i-1).get(j+1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i).get(j-1) =='+'){ins.set(j, count++ ) ;}
-					if(initialState.get(i).get(j+1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j-1) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j) =='+'){ins.set(j, count++ );}
-					if(initialState.get(i+1).get(j+1) =='+'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i-1).get(j+1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i).get(j-1) =='O'){ins.set(j, count++ ) ;}
+					if(initialState.get(i).get(j+1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j-1) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j) =='O'){ins.set(j, count++ );}
+					if(initialState.get(i+1).get(j+1) =='O'){ins.set(j, count++ );}
 
 				}
 				j++;
 			}	
 			i++;
 		}
+		
 		return neighbour ;
 
 	}
@@ -172,13 +152,16 @@ public class GameOfLife{
 			while(j< width){
 				
 				if(inside.get(j)==0 || inside.get(j)==1 || inside.get(j)>3){
-					ins.add(' ');
+					ins.add('.');
 				}
 				else if(inside.get(j)==3){
-					ins.add('+');
+					ins.add('O');
 				}
-				else if(initialState.get(i).get(j)=='+' && (inside.get(j)==2 || inside.get(j)==3)){
-					ins.add('+');
+				else if(initialState.get(i).get(j)=='O' && (inside.get(j)==2 || inside.get(j)==3)){
+					ins.add('O');
+				}
+				else if(initialState.get(i).get(j)=='.' && inside.get(j)==2){
+					ins.add('.');
 				}
 				j++;
 			}
@@ -188,16 +171,28 @@ public class GameOfLife{
 		return nextState ;
 	}
 
+	public void forever(List<List<Character>> initialState){
+		renderBoard(initialState);
+		System.out.println();
+		while(true){
+			List<List<Integer>> neighbour = noOfNeighbour(initialState);
+			List<List<Character>> nextState = nextBoardState(neighbour,initialState);
+
+			renderBoard(nextState);
+			System.out.println();
+			initialState=nextState;
+
+		}
+	}
+
 
 	public static void main(String[] args){
 
 
-		GameOfLife system1=new GameOfLife(3,3);
-		List<List<Integer>> res=system1.randomState(3,3);
-		system1.renderBoard(res);
-		// List<List<Integer>> res1=system1.noOfNeighbour(b);
-		// List<List<Character>> b1 =system1.nextBoardState(res1,b);
-		
+		GameOfLife system1=new GameOfLife(10,10);
+		List<List<Character>> initialState =system1.randomState(10,10);
+
+		system1.forever(initialState);
 		
 	}
 }
