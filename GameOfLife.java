@@ -1,12 +1,26 @@
 import java.util.* ;
 
+import java.io.IOException;
+
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.Terminal;
+
+
 public class GameOfLife{
 	int width;
 	int height;
+	Terminal terminal ;
+	Screen screen ;
 
-	GameOfLife(int width,int height){
+
+	GameOfLife(int width,int height) throws IOException{
 		this.width=width;
 		this.height=height;
+		this.terminal= new DefaultTerminalFactory().createTerminal();
+		this.screen = new TerminalScreen(terminal);
 	}
 
 	public List<List<Integer>> deadState(int width,int height){
@@ -52,13 +66,19 @@ public class GameOfLife{
 
 
 
-	public void renderBoard(List<List<Character>> random){
-		for(int i=0;i<random.size() ;i++){
-			for(int j=0;j<random.get(i).size() ;j++){
-				System.out.printf("%c ",random.get(i).get(j));
-			}
-			System.out.println();
-		}	
+	public void renderBoard(List<List<Character>> random) throws IOException{
+
+        screen.startScreen();
+        screen.clear();
+
+        for(int i=0; i<random.size() ;i++){
+            for(int j=0; j<random.get(i).size() ;j++){
+                screen.setCharacter(i, j, new TextCharacter(random.get(i).get(j)));
+            }
+        }
+        screen.refresh();
+        // screen.readInput();
+        // screen.stopScreen();
 	}
 
 
@@ -171,26 +191,29 @@ public class GameOfLife{
 		return nextState ;
 	}
 
-	public void forever(List<List<Character>> initialState){
+	public void forever(List<List<Character>> initialState)throws IOException{
 		renderBoard(initialState);
-		System.out.println();
+
 		while(true){
 			List<List<Integer>> neighbour = noOfNeighbour(initialState);
 			List<List<Character>> nextState = nextBoardState(neighbour,initialState);
 
 			renderBoard(nextState);
-			System.out.println();
+			screen.readInput();
+			// screen.stopScreen();
 			initialState=nextState;
 
 		}
 	}
 
 
-	public static void main(String[] args){
+	public static void main(String[] args)throws IOException {
 
 
-		GameOfLife system1=new GameOfLife(10,10);
-		List<List<Character>> initialState =system1.randomState(10,10);
+		GameOfLife system1=new GameOfLife(100,100);
+		List<List<Character>> initialState =system1.randomState(100,100);
+
+		
 
 		system1.forever(initialState);
 		
