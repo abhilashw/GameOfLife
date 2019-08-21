@@ -1,3 +1,5 @@
+package com.googlecode.lanterna;
+
 import java.util.* ;
 
 import java.io.IOException;
