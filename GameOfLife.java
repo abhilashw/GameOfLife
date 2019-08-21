@@ -58,7 +58,8 @@ public class GameOfLife{
 				System.out.printf("%c ",random.get(i).get(j));
 			}
 			System.out.println();
-		}	
+		}
+		System.out.print("\r");	
 	}
 
 
@@ -174,11 +175,13 @@ public class GameOfLife{
 	public void forever(List<List<Character>> initialState){
 		renderBoard(initialState);
 		System.out.println();
-		while(true){
+		boolean flag= true;
+		while(flag){
 			List<List<Integer>> neighbour = noOfNeighbour(initialState);
 			List<List<Character>> nextState = nextBoardState(neighbour,initialState);
 
 			renderBoard(nextState);
+
 			System.out.println();
 			initialState=nextState;
 
@@ -189,8 +192,8 @@ public class GameOfLife{
 	public static void main(String[] args){
 
 
-		GameOfLife system1=new GameOfLife(10,10);
-		List<List<Character>> initialState =system1.randomState(10,10);
+		GameOfLife system1=new GameOfLife(50,50);
+		List<List<Character>> initialState =system1.randomState(50,50);
 
 		system1.forever(initialState);
 		
