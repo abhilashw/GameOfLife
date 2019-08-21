@@ -12,7 +12,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 public class GameOfLifeGui{
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException0 {
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
         Screen screen = new TerminalScreen(terminal);
 

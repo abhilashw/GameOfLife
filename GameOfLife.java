@@ -1,14 +1,14 @@
-package com.googlecode.lanterna;
+// package com.googlecode.lanterna;
 
-import java.util.* ;
+// import java.util.* ;
 
-import java.io.IOException;
+// import java.io.IOException;
 
-import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
+// import com.googlecode.lanterna.TextCharacter;
+// import com.googlecode.lanterna.screen.Screen;
+// import com.googlecode.lanterna.screen.TerminalScreen;
+// import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+// import com.googlecode.lanterna.terminal.Terminal;
 
 
 public class GameOfLife{
