@@ -1,14 +1,12 @@
-// package com.googlecode.lanterna;
+package com.googlecode.lanterna;
 
-// import java.util.* ;
+import java.util.* ;
 
-// import java.io.IOException;
-
-// import com.googlecode.lanterna.TextCharacter;
-// import com.googlecode.lanterna.screen.Screen;
-// import com.googlecode.lanterna.screen.TerminalScreen;
-// import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-// import com.googlecode.lanterna.terminal.Terminal;
+import java.io.IOException;
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.screen.TerminalScreen;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.Terminal;
 
 
 public class GameOfLife{
@@ -68,7 +66,6 @@ public class GameOfLife{
 
 
 
-<<<<<<< HEAD
 	public void renderBoard(List<List<Character>> random) throws IOException{
 
         screen.startScreen();
@@ -80,18 +77,7 @@ public class GameOfLife{
             }
         }
         screen.refresh();
-        // screen.readInput();
-        // screen.stopScreen();
-=======
-	public void renderBoard(List<List<Character>> random){
-		for(int i=0;i<random.size() ;i++){
-			for(int j=0;j<random.get(i).size() ;j++){
-				System.out.printf("%c ",random.get(i).get(j));
-			}
-			System.out.println();
-		}
-		System.out.print("\r");	
->>>>>>> a160ea951c7ec7f814be61d0677488822f5fe1a1
+        
 	}
 
 
@@ -206,26 +192,19 @@ public class GameOfLife{
 
 	public void forever(List<List<Character>> initialState)throws IOException{
 		renderBoard(initialState);
-<<<<<<< HEAD
 
 		while(true){
-=======
-		System.out.println();
-		boolean flag= true;
-		while(flag){
->>>>>>> a160ea951c7ec7f814be61d0677488822f5fe1a1
 			List<List<Integer>> neighbour = noOfNeighbour(initialState);
 			List<List<Character>> nextState = nextBoardState(neighbour,initialState);
 
 			renderBoard(nextState);
-<<<<<<< HEAD
-			screen.readInput();
-			// screen.stopScreen();
-=======
-
-			System.out.println();
->>>>>>> a160ea951c7ec7f814be61d0677488822f5fe1a1
 			initialState=nextState;
+			try {
+				Thread.sleep(750);
+			}
+			catch (Exception e) {
+   				e.printStackTrace();
+			}
 
 		}
 	}
@@ -234,16 +213,10 @@ public class GameOfLife{
 	public static void main(String[] args)throws IOException {
 
 
-<<<<<<< HEAD
-		GameOfLife system1=new GameOfLife(100,100);
-		List<List<Character>> initialState =system1.randomState(100,100);
+		GameOfLife system1=new GameOfLife(50,100);
+		List<List<Character>> initialState =system1.randomState(50,100);
 
-		
-=======
-		GameOfLife system1=new GameOfLife(50,50);
-		List<List<Character>> initialState =system1.randomState(50,50);
->>>>>>> a160ea951c7ec7f814be61d0677488822f5fe1a1
-
+	
 		system1.forever(initialState);
 		
 	}
